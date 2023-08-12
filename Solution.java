@@ -2,18 +2,17 @@ import java.util.*;
 
 public class Solution {
     public long pickGifts(int[] gifts, int k) {
-        List<Integer> giftsQueue = new LinkedList<>();
-        for (int index = 0; index < gifts.length; index++) {
-            giftsQueue.add(gifts[index]);
+        PriorityQueue<Integer> giftsQueue = new PriorityQueue<>((a,b) -> Integer.compare(b,a));
+        for (int gift : gifts) {
+            giftsQueue.add(gift);
         }
         do {
-            giftsQueue.sort(null);
-            giftsQueue.set(giftsQueue.size() - 1, (int) Math.floor(Math.sqrt(giftsQueue.get(giftsQueue.size() - 1))));
+            giftsQueue.add((int) Math.sqrt(giftsQueue.poll()));
             k--;
         } while (k > 0);
         long sum = 0;
-        for (int gift : giftsQueue) {
-            sum += gift;
+        while (!giftsQueue.isEmpty()) {
+            sum += giftsQueue.poll();
         }
         return sum;
     }
