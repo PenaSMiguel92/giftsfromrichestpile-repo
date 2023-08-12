@@ -6,12 +6,9 @@ public class Solution {
         for (int index = 0; index < gifts.length; index++) {
             giftsQueue.add(gifts[index]);
         }
-
         do {
             giftsQueue.sort(null);
-            System.out.println(giftsQueue);
-            giftsQueue.set(giftsQueue.size() - 1, (int) Math.floor(Math.sqrt(giftsQueue.get(giftsQueue.size() - 1))));    
-            // gifts[maxPileIndex] = (int) Math.floor(Math.sqrt(maxValue));
+            giftsQueue.set(giftsQueue.size() - 1, (int) Math.floor(Math.sqrt(giftsQueue.get(giftsQueue.size() - 1))));
             k--;
         } while (k > 0);
         long sum = 0;
