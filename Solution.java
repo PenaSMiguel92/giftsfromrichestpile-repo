@@ -1,21 +1,21 @@
+import java.util.*;
+
 public class Solution {
     public long pickGifts(int[] gifts, int k) {
-        do {
-            int maxValue = -100000;
-            int maxPileIndex = 0;
-            for (int index = 0; index < gifts.length; index++) {
-                if (gifts[index] > maxValue) {
-                    maxValue = gifts[index];
-                    maxPileIndex = index;
-                }
-            }
-            gifts[maxPileIndex] = (int) Math.floor(Math.sqrt(maxValue));
+        List<Integer> giftsQueue = new LinkedList<>();
+        for (int index = 0; index < gifts.length; index++) {
+            giftsQueue.add(gifts[index]);
+        }
 
-            System.gc();
+        do {
+            giftsQueue.sort(null);
+            System.out.println(giftsQueue);
+            giftsQueue.set(giftsQueue.size() - 1, (int) Math.floor(Math.sqrt(giftsQueue.get(giftsQueue.size() - 1))));    
+            // gifts[maxPileIndex] = (int) Math.floor(Math.sqrt(maxValue));
             k--;
         } while (k > 0);
         long sum = 0;
-        for (int gift : gifts) {
+        for (int gift : giftsQueue) {
             sum += gift;
         }
         return sum;
